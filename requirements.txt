@@ -1,0 +1,13 @@
+The package requirements for this Python program are as follows:
+
+- requests
+- bs4 (BeautifulSoup)
+- nltk
+- sklearn
+- numpy
+
+You can install these packages using pip by running the command:
+
+```
+pip install requests bs4 nltk sklearn numpy
+```
