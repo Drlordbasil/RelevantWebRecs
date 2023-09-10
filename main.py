@@ -34,7 +34,8 @@ class WebPage:
             url_element = article.find('a')
             if url_element and 'href' in url_element.attrs:
                 url = url_element['href']
-                self.content.append({'headline': headline, 'summary': summary, 'keywords': keywords, 'url': url})
+                self.content.append(
+                    {'headline': headline, 'summary': summary, 'keywords': keywords, 'url': url})
 
 
 class WebContentAggregator:
@@ -65,7 +66,8 @@ class WebContentAggregator:
                 url = content['url']
                 if url not in unique_content:
                     unique_content[url] = content
-        self.webpages = [WebPage(url, '') for url, content in unique_content.items()]
+        self.webpages = [WebPage(url, '')
+                         for url, content in unique_content.items()]
 
     def recommend_content(self, user_preferences):
         vectorizer = CountVectorizer(stop_words=stopwords.words('english'))
