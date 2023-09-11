@@ -53,7 +53,7 @@ class WebContentAggregator:
             if response.status_code == 200:
                 self.webpages.append(WebPage(url, response.text))
             else:
-                print(f"Failed to fetch webpage for query: {query}")
+                raise Exception(f"Failed to fetch webpage for query: {query}")
 
     def scrape_content(self):
         for webpage in self.webpages:
@@ -91,16 +91,19 @@ class WebContentAggregator:
         return recommendations
 
     def run(self):
-        self.fetch_webpages()
-        self.scrape_content()
-        self.deduplicate_content()
-        user_preferences = input("Enter your interests: ")
-        recommendations = self.recommend_content(user_preferences)
-        for recommendation in recommendations:
-            print(recommendation['headline'])
-            print(recommendation['summary'])
-            print(recommendation['url'])
-            print('---')
+        try:
+            self.fetch_webpages()
+            self.scrape_content()
+            self.deduplicate_content()
+            user_preferences = input("Enter your interests: ")
+            recommendations = self.recommend_content(user_preferences)
+            for recommendation in recommendations:
+                print(recommendation['headline'])
+                print(recommendation['summary'])
+                print(recommendation['url'])
+                print('---')
+        except Exception as e:
+            print("An error occurred:", str(e))
 
 
 web_aggregator = WebContentAggregator()
